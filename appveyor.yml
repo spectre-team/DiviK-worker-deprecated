@@ -45,7 +45,7 @@ build_script:
 - cmd: msbuild "C:\projects\DiviK-worker\src\DiviK-worker.sln" /p:Configuration=%CONFIGURATION% /p:Platform=%PLATFORM% /m /verbosity:quiet /p:DeployOnBuild=true /p:PublishProfile=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 after_build:
 - ps: C:\projects\DiviK-worker\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
-- cmd: C:\projects\DiviK-worker\scripts\package_web_project.bat DiviK-worker DiviK-worker
+- cmd: C:\projects\DiviK-worker\scripts\package_web_project.bat DiviK-worker Spectre
 
 test_script:
 - cmd: C:\projects\DiviK-worker\scripts\test_dotnet.bat --except Algorithm
