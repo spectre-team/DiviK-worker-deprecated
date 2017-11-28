@@ -27,53 +27,53 @@ using System.IO;
 
 namespace Spectre.Algorithms.Tests.Methods
 {
-	[TestFixture, Category("Algorithm")]
-	public class SegmentationTests
-	{
-		private Segmentation _segmentation;
-		private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
+    [TestFixture][Category("Algorithm")]
+    public class SegmentationTests
+    {
+        private Segmentation _segmentation;
+        private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
 
-		[OneTimeSetUp]
-		public void SetUpClass()
-		{
-			_segmentation = new Segmentation();
-		}
+        [OneTimeSetUp]
+        public void SetUpClass()
+        {
+            _segmentation = new Segmentation();
+        }
 
-		[OneTimeTearDown]
-		public void TearDownClass()
-		{
-			_segmentation.Dispose();
-		}
+        [OneTimeTearDown]
+        public void TearDownClass()
+        {
+            _segmentation.Dispose();
+        }
 
-		[Test]
-		public void DivikSimple()
-		{
+        [Test]
+        public void DivikSimple()
+        {
             double[] mz = { 1, 2, 3, 4 };
             double[,] data = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 1, 1, 1, 1 } };
-			int[,] coordinates = { { 1, 1 }, { 2, 2 }, { 1, 2 }, { 2, 1 } };
+            int[,] coordinates = { { 1, 1 }, { 2, 2 }, { 1, 2 }, { 2, 1 } };
             IDataset dataset = new BasicTextDataset(mz, data, coordinates);
 
-            var options = DivikOptions.ForLevels(1);
-			options.UsingVarianceFiltration = false;
-			options.UsingAmplitudeFiltration = false;
-			options.MaxK = 2;
-			options.Metric = Metric.Euclidean;
+            var options = DivikOptions.ForLevels(levels: 1);
+            options.UsingVarianceFiltration = false;
+            options.UsingAmplitudeFiltration = false;
+            options.MaxK = 2;
+            options.Metric = Metric.Euclidean;
 
-			DivikResult result = _segmentation.Divik(dataset, options);
+            var result = _segmentation.Divik(dataset, options);
 
-			// Assert
-			Assert.IsNotNull(result);
-		}
+            // Assert
+            Assert.IsNotNull(result);
+        }
 
-        [Test, Category("VeryLong")]
+        [Test][Category("VeryLong")]
         public void DivikBigData()
         {
             // path to directory with test project
             var path = TestDirectory + "\\hnc1_tumor.txt";
             var dataset = new BasicTextDataset(path);
-            var options = DivikOptions.ForLevels(2);
+            var options = DivikOptions.ForLevels(levels: 2);
 
-            DivikResult result = _segmentation.Divik(dataset, options);
+            var result = _segmentation.Divik(dataset, options);
 
             // Assert
             Assert.IsNotNull(result);
