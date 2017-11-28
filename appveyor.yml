@@ -39,16 +39,16 @@ nuget:
   project_feed: false
 
 install:
-- cmd: C:\projects\spectre\scripts\restore_nugets.bat
+- cmd: C:\projects\DiviK-worker\scripts\restore_nugets.bat
 
 build_script:
-- cmd: msbuild "C:\projects\spectre\src\DiviK-worker.sln" /p:Configuration=%CONFIGURATION% /p:Platform=%PLATFORM% /m /verbosity:quiet /p:DeployOnBuild=true /p:PublishProfile=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+- cmd: msbuild "C:\projects\DiviK-worker\src\DiviK-worker.sln" /p:Configuration=%CONFIGURATION% /p:Platform=%PLATFORM% /m /verbosity:quiet /p:DeployOnBuild=true /p:PublishProfile=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 after_build:
-- ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
-- cmd: C:\projects\spectre\scripts\package_web_project.bat DiviK-worker DiviK-worker
+- ps: C:\projects\DiviK-worker\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
+- cmd: C:\projects\DiviK-worker\scripts\package_web_project.bat DiviK-worker DiviK-worker
 
 test_script:
-- cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
+- cmd: C:\projects\DiviK-worker\scripts\test_dotnet.bat --except Algorithm
 
 artifacts:
 - path: DiviK-worker-$(configuration).zip
