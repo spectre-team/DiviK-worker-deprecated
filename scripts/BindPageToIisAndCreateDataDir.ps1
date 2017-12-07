@@ -7,7 +7,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 
 if($AppVeyor -eq $True)
 {
-    $ProjectRoot = "c:\projects\spectre"
+    $ProjectRoot = "c:\projects\DiviK-worker"
     Set-Location $ProjectRoot
 }
 else
